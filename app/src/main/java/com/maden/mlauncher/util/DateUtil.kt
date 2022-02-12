@@ -8,12 +8,6 @@ class DateUtil {
     companion object {
         private val calendar: Calendar = Calendar.getInstance()
 
-        fun getSystemHour(): String {
-            val rightNow = Calendar.getInstance()
-            val currentHourIn24Format: Int =rightNow.get(Calendar.HOUR_OF_DAY) // return the hour in 24 hrs format (ranging from 0-23)
-            val currentHourIn12Format: Int = rightNow.get(Calendar.HOUR) // return the hour in 12 hrs format (ranging from 0-11)
-            return currentHourIn24Format.toString()
-        }
 
         fun getSystemHourAndMin(): String {
             val calendar = Calendar.getInstance()
@@ -38,8 +32,6 @@ class DateUtil {
 
         private fun getFullDayName(day: Int): String? {
             val c = Calendar.getInstance()
-            // date doesn't matter - it has to be a Monday
-            // I new that first August 2011 is one ;-)
             c[2011, 7, 1, 0, 0] = 0
             c.add(Calendar.DAY_OF_MONTH, day)
             return java.lang.String.format("%tA", c)
