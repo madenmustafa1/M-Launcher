@@ -3,11 +3,8 @@ package com.maden.mlauncher.adapter
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
+import android.view.*
+import android.widget.*
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.maden.mlauncher.R
@@ -56,6 +53,8 @@ class AppsDrawerAdapter(private val context: Context) :
         val imageView: ImageView = holder.img
         imageView.setImageDrawable(appIcon)
 
+        checkLastItem(holder, position)
+
         holder.itemView.setOnClickListener {
             val launchIntent: Intent? =
                 holder.itemView.context.packageManager.getLaunchIntentForPackage(appPackage)
@@ -69,6 +68,7 @@ class AppsDrawerAdapter(private val context: Context) :
         }
     }
 
+
     override fun getItemCount(): Int {
         return appsList!!.size
     }
@@ -77,5 +77,24 @@ class AppsDrawerAdapter(private val context: Context) :
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var textView: TextView = itemView.findViewById(R.id.tv_app_name)
         var img: ImageView = itemView.findViewById(R.id.app_icon)
+    }
+
+    private fun checkLastItem(holder: ViewHolder, position: Int){
+        val hasMenuKey: Boolean = ViewConfiguration.get(context).hasPermanentMenuKey()
+        val hasBackKey = KeyCharacterMap.deviceHasKey(KeyEvent.KEYCODE_BACK)
+
+        if (position == appsList!!.lastIndex){
+            if (hasBackKey && hasMenuKey) {
+                // no navigation bar, unless it is enabled in the settings
+            } else {
+                val params = holder.itemView.layoutParams as RecyclerView.LayoutParams
+                params.bottomMargin = 140
+                holder.itemView.layoutParams = params
+            }
+        }else{
+            val params = holder.itemView.layoutParams as RecyclerView.LayoutParams
+            params.bottomMargin = 0
+            holder.itemView.layoutParams = params
+        }
     }
 }

@@ -1,41 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
-    android:clickable="false"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:clickable="false">
 
 
     <LinearLayout
-        android:clickable="false"
-        android:layout_marginTop="2dp"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
-        android:orientation="horizontal"
-        android:layout_height="wrap_content">
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:clickable="false"
+        android:orientation="horizontal">
 
 
         <ImageView
-            android:src="@drawable/bg"
             android:id="@+id/app_icon"
-            android:clickable="false"
             android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:clickable="false"
             android:scaleType="centerCrop"
-            android:layout_height="48dp" />
+            android:src="@drawable/bg" />
 
 
         <TextView
-            android:layout_marginStart="16dp"
+            android:id="@+id/tv_app_name"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="16dp"
+            android:ellipsize="end"
+            android:fontFamily="sans-serif-medium"
+            android:lines="1"
             android:maxWidth="100dp"
             android:minWidth="50dp"
             android:text="app name"
-            android:lines="1"
-            android:textSize="14sp"
-            android:layout_gravity="center_vertical"
-            android:ellipsize="end"
-            android:fontFamily="sans-serif-medium"
-            android:layout_height="wrap_content"
-            android:id="@+id/tv_app_name"/>
+            android:textSize="14sp" />
 
     </LinearLayout>
 </RelativeLayout>

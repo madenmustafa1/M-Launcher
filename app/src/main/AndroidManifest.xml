@@ -2,11 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.maden.mlauncher">
 
-    <!--
-     android:theme="@style/Theme.MLauncher"
-     android:theme="@style/AppTheme"
-     -->
+
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+
+    <permission android:name="android.permission.QUERY_ALL_PACKAGES" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -19,19 +20,31 @@
         android:theme="@style/Theme.MLauncher"
         android:launchMode="singleTask"
         >
+
+
         <activity
             android:name=".view.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
+                <action android:name="android.media.action.IMAGE_CAPTURE" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
 
                 <category android:name="android.intent.category.HOME" />
 
                 <category android:name="android.intent.category.DEFAULT" />
+
             </intent-filter>
         </activity>
+
     </application>
+
+    <queries>
+        <intent>
+            <action android:name="*" />
+        </intent>
+    </queries>
 
 </manifest>

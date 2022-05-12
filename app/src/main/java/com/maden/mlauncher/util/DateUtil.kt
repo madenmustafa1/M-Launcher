@@ -8,7 +8,6 @@ class DateUtil {
     companion object {
         private val calendar: Calendar = Calendar.getInstance()
 
-
         fun getSystemHourAndMin(): String {
             val calendar = Calendar.getInstance()
             val hour24hrs = calendar[Calendar.HOUR_OF_DAY]
@@ -29,21 +28,6 @@ class DateUtil {
         }
 
         private fun getFullMonthName() = String.format(Locale.US,"%tB",calendar)
-
-        private fun getFullDayName(day: Int): String? {
-            val c = Calendar.getInstance()
-            c[2011, 7, 1, 0, 0] = 0
-            c.add(Calendar.DAY_OF_MONTH, day)
-            return java.lang.String.format("%tA", c)
-        }
-
-        fun getShortDayName(day: Int): String? {
-            val c = Calendar.getInstance()
-            c[2011, 7, 1, 0, 0] = 0
-            c.add(Calendar.DAY_OF_MONTH, day)
-            return java.lang.String.format("%ta", c)
-        }
-
 
     }
 
