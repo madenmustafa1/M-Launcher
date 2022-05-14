@@ -1,5 +1,6 @@
 package com.maden.mlauncher.adapter
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -8,10 +9,11 @@ import android.widget.*
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.maden.mlauncher.R
+
 import com.maden.mlauncher.model.AppInfoModel
 
 
-class AppsDrawerAdapter(private val context: Context) :
+class AppsDrawerAdapter(private val context: Context, private val activity: Activity) :
     RecyclerView.Adapter<AppsDrawerAdapter.ViewHolder>(
 
     ) {
@@ -64,8 +66,11 @@ class AppsDrawerAdapter(private val context: Context) :
                     launchIntent,
                     null
                 ) //null pointer check in case package name was not found
+
+                activity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         }
+
     }
 
 

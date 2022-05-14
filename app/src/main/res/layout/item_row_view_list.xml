@@ -2,41 +2,56 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:clickable="false">
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
+        android:layout_marginStart="@dimen/_18sdp"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
         android:clickable="false"
         android:orientation="horizontal">
 
+        <androidx.cardview.widget.CardView
+            android:layout_width="@dimen/_38sdp"
+            android:layout_height="@dimen/_38sdp"
+            app:cardCornerRadius="250dp"
+            android:padding="@dimen/_7sdp"
+            app:cardBackgroundColor="@color/transparent">
 
-        <ImageView
-            android:id="@+id/app_icon"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:clickable="false"
-            android:scaleType="centerCrop"
-            android:src="@drawable/bg" />
+            <androidx.cardview.widget.CardView
+                android:layout_width="@dimen/_38sdp"
+                android:layout_height="@dimen/_38sdp"
+                app:cardCornerRadius="250dp"
+                android:layout_gravity="center">
 
+                <ImageView
+                    android:id="@+id/app_icon"
+                    android:layout_width="@dimen/_38sdp"
+                    android:layout_height="@dimen/_38sdp"
+                    android:src="@drawable/bg"
+                    android:scaleType="centerCrop"/>
+
+            </androidx.cardview.widget.CardView>
+
+        </androidx.cardview.widget.CardView>
 
         <TextView
             android:id="@+id/tv_app_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="@dimen/_8sdp"
             android:ellipsize="end"
             android:fontFamily="sans-serif-medium"
             android:lines="1"
-            android:maxWidth="100dp"
-            android:minWidth="50dp"
+            android:maxWidth="@dimen/_180sdp"
+            android:minWidth="@dimen/_50sdp"
             android:text="app name"
-            android:textSize="14sp" />
+            android:textSize="16sp" />
 
     </LinearLayout>
 </RelativeLayout>

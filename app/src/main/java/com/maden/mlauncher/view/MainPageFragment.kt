@@ -56,7 +56,7 @@ class MainPageFragment : Fragment() {
 
     private fun initRecyclerView() {
         recyclerView = binding.appDrawerRecylerView
-        adapter = AppsDrawerAdapter(requireContext());
+        adapter = AppsDrawerAdapter(requireContext(), requireActivity());
         layoutManager = LinearLayoutManager(requireContext());
 
         recyclerView?.let {

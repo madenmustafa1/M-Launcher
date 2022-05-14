@@ -1,60 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    android:background="@android:color/transparent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/transparent"
     tools:context=".view.MainActivity">
 
 
     <LinearLayout
-        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        >
+        android:layout_marginTop="10dp"
+        android:orientation="vertical">
 
         <TextView
-            android:layout_marginTop="25dp"
             android:id="@+id/systemHour"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="30sp"
-            android:textStyle="bold"
-            android:textColor="@color/black"
             android:layout_marginStart="25dp"
+            android:layout_marginTop="25dp"
             android:text="12.02.2022"
-            />
+            android:textColor="@color/black"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
         <TextView
-            android:layout_marginTop="1dp"
             android:id="@+id/systemDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:textColor="@color/black"
             android:layout_marginStart="25dp"
+            android:layout_marginTop="1dp"
             android:text="22:00"
-            />
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
 
         <androidx.recyclerview.widget.RecyclerView
-            android:layoutAnimation="@anim/layout_animation"
-            android:background="@android:color/transparent"
-            android:layout_marginTop="5dp"
             android:id="@+id/appDrawer_recylerView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+            android:background="@android:color/transparent"
+            android:layoutAnimation="@anim/layout_animation">
 
         </androidx.recyclerview.widget.RecyclerView>
     </LinearLayout>
-
-
-
-
-
 
 
 </RelativeLayout>

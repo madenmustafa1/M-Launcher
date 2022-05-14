@@ -66,4 +66,6 @@ dependencies {
     // Jetpack Compose Integration
     implementation "androidx.navigation:navigation-compose:$nav_version"
 
+    implementation 'com.intuit.sdp:sdp-android:1.0.6'
+
 }
