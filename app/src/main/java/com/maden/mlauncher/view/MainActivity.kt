@@ -40,14 +40,11 @@ class MainActivity : AppCompatActivity() {
     private fun hideActionBar(){
         try {
             supportActionBar?.hide();
-
-
             val w: Window = window
             w.setFlags(
                 WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
                 WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
             )
-
         } catch (e: Exception) {
 
         }

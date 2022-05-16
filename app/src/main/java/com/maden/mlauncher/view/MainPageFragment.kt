@@ -1,7 +1,7 @@
 package com.maden.mlauncher.view
 
 
-
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.*
@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.maden.mlauncher.R
 import com.maden.mlauncher.adapter.AppsDrawerAdapter
 import com.maden.mlauncher.databinding.FragmentMainPageBinding
+import com.maden.mlauncher.model.AppInfoModel
+import com.maden.mlauncher.util.AppUtil
 import com.maden.mlauncher.util.DateUtil
 
 
@@ -32,6 +34,7 @@ class MainPageFragment : Fragment() {
     private var recyclerView: RecyclerView? = null
     private var adapter: RecyclerView.Adapter<*>? = null
     private var layoutManager: RecyclerView.LayoutManager? = null
+    private var appInfoModelList: ArrayList<AppInfoModel> = arrayListOf()
 
     private var _binding: FragmentMainPageBinding? = null
     private val binding get() = _binding!!
@@ -39,11 +42,10 @@ class MainPageFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         transparentStatusBar()
         initButton()
 
-
+        setUpApps().also { initApps() }
     }
 
     private fun initButton() {
@@ -52,7 +54,6 @@ class MainPageFragment : Fragment() {
 
         initRecyclerView()
     }
-
 
     private fun initRecyclerView() {
         recyclerView = binding.appDrawerRecylerView
@@ -77,4 +78,80 @@ class MainPageFragment : Fragment() {
         window.statusBarColor = ContextCompat.getColor(requireActivity(), R.color.transparent)
     }
 
+    private fun setUpApps() {
+        val pManager: PackageManager = requireContext().packageManager
+        val i = Intent(Intent.ACTION_MAIN, null)
+        i.addCategory(Intent.CATEGORY_LAUNCHER)
+        val allApps = pManager.queryIntentActivities(i, 0)
+        for (ri in allApps) {
+            if (ri.activityInfo.packageName == AppUtil.firstApp ||
+                ri.activityInfo.packageName == AppUtil.secondApp ||
+                ri.activityInfo.packageName == AppUtil.thirdApp
+            ) {
+                appInfoModelList.add(AppInfoModel(
+                    label = ri.loadLabel(pManager),
+                    packageName = ri.activityInfo.packageName,
+                    icon = ri.activityInfo.loadIcon(pManager)
+                ))
+            }
+        }
+    }
+
+    private fun initApps(){
+        setFirstApp()
+        setSecondApp()
+        setThirdApp()
+    }
+
+    private fun setFirstApp() {
+        for (i in appInfoModelList) {
+            if (i.packageName == AppUtil.firstApp) {
+                with(binding.appFirst) {
+                    setImageDrawable(i.icon)
+                    setOnClickListener {
+                        goSelectedApp(i.packageName.toString())
+                    }
+                }
+            }
+        }
+    }
+
+    private fun setSecondApp() {
+        for (i in appInfoModelList) {
+            if (i.packageName == AppUtil.secondApp) {
+                with(binding.appSecond) {
+                    setImageDrawable(i.icon)
+                    setOnClickListener {
+                        goSelectedApp(i.packageName.toString())
+                    }
+                }
+            }
+        }
+    }
+
+    private fun setThirdApp() {
+        for (i in appInfoModelList) {
+            if (i.packageName == AppUtil.thirdApp) {
+                with(binding.appThird) {
+                    setImageDrawable(i.icon)
+                    setOnClickListener {
+                        goSelectedApp(i.packageName.toString())
+                    }
+                }
+            }
+        }
+    }
+
+    private fun goSelectedApp(packageName: String){
+        val launchIntent: Intent? =
+            requireContext().packageManager.getLaunchIntentForPackage(packageName)
+        if (launchIntent != null) {
+            requireActivity().startActivity(
+                launchIntent,
+                null
+            )
+
+            requireActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        }
+    }
 }

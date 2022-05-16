@@ -18,28 +18,26 @@
         <androidx.cardview.widget.CardView
             android:layout_width="@dimen/_38sdp"
             android:layout_height="@dimen/_38sdp"
-            app:cardCornerRadius="250dp"
+            app:cardCornerRadius="1000dp"
             android:padding="@dimen/_7sdp"
-            app:cardBackgroundColor="@color/transparent">
+            app:cardElevation="0dp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:background="@color/transparent"
+            app:cardBackgroundColor="@color/transparent"
+            >
 
-            <androidx.cardview.widget.CardView
+            <ImageView
+                android:id="@+id/app_icon"
                 android:layout_width="@dimen/_38sdp"
                 android:layout_height="@dimen/_38sdp"
-                app:cardCornerRadius="250dp"
-                android:layout_gravity="center">
-
-                <ImageView
-                    android:id="@+id/app_icon"
-                    android:layout_width="@dimen/_38sdp"
-                    android:layout_height="@dimen/_38sdp"
-                    android:src="@drawable/bg"
-                    android:scaleType="centerCrop"/>
-
-            </androidx.cardview.widget.CardView>
+                android:src="@drawable/bg"
+                android:scaleType="centerCrop"/>
 
         </androidx.cardview.widget.CardView>
 
+
         <TextView
+            android:textColor="@color/white"
             android:id="@+id/tv_app_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -5,6 +5,8 @@
       <map>
         <entry key="..\:/AndroidStudioProjects/MLauncher/app/src/main/res/drawable/circle.xml" value="0.1135" />
         <entry key="..\:/AndroidStudioProjects/MLauncher/app/src/main/res/drawable/img_radius.xml" value="0.1135" />
+        <entry key="..\:/AndroidStudioProjects/MLauncher/app/src/main/res/drawable/radius.xml" value="0.176" />
+        <entry key="..\:/AndroidStudioProjects/MLauncher/app/src/main/res/drawable/radius_bg.xml" value="0.2445" />
         <entry key="..\:/AndroidStudioProjects/MLauncher/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/AndroidStudioProjects/MLauncher/app/src/main/res/layout/fragment_app_drawer.xml" value="0.25416666666666665" />
         <entry key="..\:/AndroidStudioProjects/MLauncher/app/src/main/res/layout/fragment_main_page.xml" value="0.264" />
