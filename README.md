@@ -2,4 +2,4 @@
 This project is launcher app for android.
  
 
-![1](https://user-images.githubusercontent.com/67011777/168670879-8c7a79c8-4196-4b93-8952-9154e34fcf8e.png)
+![2](https://user-images.githubusercontent.com/67011777/168671252-07d51e6e-b89a-405c-856d-92672de967e9.png)
