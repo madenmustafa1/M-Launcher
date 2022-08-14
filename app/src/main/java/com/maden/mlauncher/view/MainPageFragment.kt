@@ -28,7 +28,7 @@ class MainPageFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentMainPageBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -67,11 +67,11 @@ class MainPageFragment : Fragment() {
 
     private fun initRecyclerView() {
         recyclerView = binding.appDrawerRecylerView
-        adapter = AppsDrawerAdapter(appInfoModelList, initAdapterClickListener(), false);
-        layoutManager = LinearLayoutManager(requireContext());
+        adapter = AppsDrawerAdapter(appInfoModelList, initAdapterClickListener(), false)
+        layoutManager = LinearLayoutManager(requireContext())
         recyclerView?.let {
-            it.layoutManager = layoutManager;
-            it.adapter = adapter;
+            it.layoutManager = layoutManager
+            it.adapter = adapter
         }
     }
 
@@ -181,12 +181,12 @@ class MainPageFragment : Fragment() {
             requireActivity().overridePendingTransition(
                 R.anim.slide_in_right,
                 R.anim.slide_out_left
-            );
+            )
         }
     }
 
     private fun shaker() {
-        adapter = AppsDrawerAdapter(appInfoModelList, initAdapterClickListener(), true);
+        adapter = AppsDrawerAdapter(appInfoModelList, initAdapterClickListener(), true)
         recyclerView!!.adapter = adapter
         adapter!!.notifyDataSetChanged()
     }
@@ -233,7 +233,7 @@ class MainPageFragment : Fragment() {
             requireActivity().overridePendingTransition(
                 R.anim.slide_in_right,
                 R.anim.slide_out_left
-            );
+            )
         }
     }
 }
