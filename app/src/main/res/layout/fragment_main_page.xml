@@ -84,7 +84,7 @@
                     android:layout_height="@dimen/_35sdp"
                     android:layout_marginVertical="@dimen/_5sdp"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/call" />
+                    android:src="@drawable/add_icon_ic" />
 
             </androidx.cardview.widget.CardView>
 
@@ -103,7 +103,7 @@
                     android:layout_height="@dimen/_35sdp"
                     android:layout_marginVertical="@dimen/_5sdp"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/call" />
+                    android:src="@drawable/add_icon_ic" />
 
             </androidx.cardview.widget.CardView>
 
@@ -122,7 +122,7 @@
                     android:layout_height="@dimen/_35sdp"
                     android:layout_marginVertical="@dimen/_5sdp"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/call" />
+                    android:src="@drawable/add_icon_ic" />
 
             </androidx.cardview.widget.CardView>
 

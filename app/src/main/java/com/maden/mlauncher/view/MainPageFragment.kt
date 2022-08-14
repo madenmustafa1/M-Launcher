@@ -3,6 +3,7 @@ package com.maden.mlauncher.view
 
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.*
 import androidx.core.content.ContextCompat
@@ -10,11 +11,12 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.maden.mlauncher.R
+import com.maden.mlauncher.adapter.AdapterClickListener
 import com.maden.mlauncher.adapter.AppsDrawerAdapter
 import com.maden.mlauncher.databinding.FragmentMainPageBinding
 import com.maden.mlauncher.model.AppInfoModel
-import com.maden.mlauncher.util.AppUtil
 import com.maden.mlauncher.util.DateUtil
+import com.maden.mlauncher.util.SharedPrefsManager
 
 
 class MainPageFragment : Fragment() {
@@ -39,27 +41,34 @@ class MainPageFragment : Fragment() {
     private var _binding: FragmentMainPageBinding? = null
     private val binding get() = _binding!!
 
+    private var sharedPrefsManager: SharedPrefsManager? = null
+    private var setFirstApp: Boolean = false
+    private var setSecondApp: Boolean = false
+    private var seThirdApp: Boolean = false
+    private var firstApp: String? = null
+    private var secondApp: String? = null
+    private var thirdApp: String? = null
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        sharedPrefsManager = SharedPrefsManager(requireContext())
         transparentStatusBar()
-        initButton()
-
-        setUpApps().also { initApps() }
+        setUpApps().also {
+            initButton()
+            initApps()
+        }
     }
 
     private fun initButton() {
         binding.systemHour.text = DateUtil.getSystemHourAndMin()
         binding.systemDate.text = DateUtil.getSystemDate()
-
         initRecyclerView()
     }
 
     private fun initRecyclerView() {
         recyclerView = binding.appDrawerRecylerView
-        adapter = AppsDrawerAdapter(requireContext(), requireActivity());
+        adapter = AppsDrawerAdapter(appInfoModelList, initAdapterClickListener(), false);
         layoutManager = LinearLayoutManager(requireContext());
-
         recyclerView?.let {
             it.layoutManager = layoutManager;
             it.adapter = adapter;
@@ -80,69 +89,87 @@ class MainPageFragment : Fragment() {
 
     private fun setUpApps() {
         val pManager: PackageManager = requireContext().packageManager
+        appInfoModelList.clear()
         val i = Intent(Intent.ACTION_MAIN, null)
         i.addCategory(Intent.CATEGORY_LAUNCHER)
         val allApps = pManager.queryIntentActivities(i, 0)
         for (ri in allApps) {
-            if (ri.activityInfo.packageName == AppUtil.firstApp ||
-                ri.activityInfo.packageName == AppUtil.secondApp ||
-                ri.activityInfo.packageName == AppUtil.thirdApp
-            ) {
-                appInfoModelList.add(AppInfoModel(
-                    label = ri.loadLabel(pManager),
-                    packageName = ri.activityInfo.packageName,
-                    icon = ri.activityInfo.loadIcon(pManager)
-                ))
-            }
+            val app = AppInfoModel(
+                label = ri.loadLabel(pManager),
+                packageName = ri.activityInfo.packageName,
+                icon = ri.activityInfo.loadIcon(pManager)
+            )
+            appInfoModelList.add(app)
         }
     }
 
-    private fun initApps(){
-        setFirstApp()
-        setSecondApp()
-        setThirdApp()
-    }
+    private fun initApps() {
 
-    private fun setFirstApp() {
-        for (i in appInfoModelList) {
-            if (i.packageName == AppUtil.firstApp) {
-                with(binding.appFirst) {
-                    setImageDrawable(i.icon)
-                    setOnClickListener {
-                        goSelectedApp(i.packageName.toString())
-                    }
+        sharedPrefsManager?.let {
+            firstApp = it.getString(it.firstApp)
+            secondApp = it.getString(it.secondApp)
+            thirdApp = it.getString(it.thirdApp)
+
+            for (i in appInfoModelList) {
+                firstApp?.let {
+                    if (i.packageName == firstApp) setFirstApp(i.icon)
+                }
+                secondApp?.let {
+                    if (i.packageName == secondApp) setSecondApp(i.icon)
+                }
+                thirdApp?.let {
+                    if (i.packageName == thirdApp) setThirdApp(i.icon)
                 }
             }
         }
-    }
 
-    private fun setSecondApp() {
-        for (i in appInfoModelList) {
-            if (i.packageName == AppUtil.secondApp) {
-                with(binding.appSecond) {
-                    setImageDrawable(i.icon)
-                    setOnClickListener {
-                        goSelectedApp(i.packageName.toString())
-                    }
-                }
+        binding.appFirst.setOnClickListener {
+            firstApp?.let {
+                goSelectedApp(it)
+            } ?: run {
+                setFirstApp = true
+                shaker()
             }
+        }
+        binding.appSecond.setOnClickListener {
+            secondApp?.let {
+                goSelectedApp(it)
+            } ?: run {
+                setSecondApp = true
+                shaker()
+            }
+        }
+        binding.appThird.setOnClickListener {
+            thirdApp?.let {
+                goSelectedApp(it)
+            } ?: run {
+                seThirdApp = true
+                shaker()
+            }
+        }
+
+        binding.appFirst.setOnLongClickListener {
+            setFirstApp = true
+            shaker()
+            return@setOnLongClickListener true
+        }
+        binding.appSecond.setOnLongClickListener {
+            setSecondApp = true
+            shaker()
+            return@setOnLongClickListener true
+        }
+        binding.appThird.setOnLongClickListener {
+            seThirdApp = true
+            shaker()
+            return@setOnLongClickListener true
         }
     }
 
-    private fun setThirdApp() {
-        for (i in appInfoModelList) {
-            if (i.packageName == AppUtil.thirdApp) {
-                with(binding.appThird) {
-                    setImageDrawable(i.icon)
-                    setOnClickListener {
-                        goSelectedApp(i.packageName.toString())
-                    }
-                }
-            }
-        }
-    }
+    private fun setFirstApp(drawable: Drawable) = binding.appFirst.setImageDrawable(drawable)
+    private fun setSecondApp(drawable: Drawable) = binding.appSecond.setImageDrawable(drawable)
+    private fun setThirdApp(drawable: Drawable) = binding.appThird.setImageDrawable(drawable)
 
-    private fun goSelectedApp(packageName: String){
+    private fun goSelectedApp(packageName: String) {
         val launchIntent: Intent? =
             requireContext().packageManager.getLaunchIntentForPackage(packageName)
         if (launchIntent != null) {
@@ -151,7 +178,62 @@ class MainPageFragment : Fragment() {
                 null
             )
 
-            requireActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+            requireActivity().overridePendingTransition(
+                R.anim.slide_in_right,
+                R.anim.slide_out_left
+            );
+        }
+    }
+
+    private fun shaker() {
+        adapter = AppsDrawerAdapter(appInfoModelList, initAdapterClickListener(), true);
+        recyclerView!!.adapter = adapter
+        adapter!!.notifyDataSetChanged()
+    }
+
+    private fun initAdapterClickListener(): AdapterClickListener {
+        return object : AdapterClickListener {
+            override fun onClickListener(packageName: String, index: Int, drawable: Drawable) {
+                when {
+                    setFirstApp -> {
+                        setFirstApp = false
+                        firstApp = packageName
+                        setFirstApp(drawable)
+                        sharedPrefsManager?.setData(sharedPrefsManager?.firstApp ?: "", packageName)
+                    }
+                    setSecondApp -> {
+                        setSecondApp = false
+                        secondApp = packageName
+                        setSecondApp(drawable)
+                        sharedPrefsManager?.setData(sharedPrefsManager?.secondApp ?: "", packageName)
+                    }
+                    seThirdApp -> {
+                        seThirdApp = false
+                        thirdApp = packageName
+                        setThirdApp(drawable)
+                        sharedPrefsManager?.setData(sharedPrefsManager?.thirdApp ?: "", packageName)
+                    }
+                    else -> {
+                        goToSecondApp(packageName)
+                    }
+                }
+            }
+        }
+    }
+
+    private fun goToSecondApp(packageName: String){
+        val launchIntent: Intent? =
+            requireContext().packageManager.getLaunchIntentForPackage(packageName)
+        if (launchIntent != null) {
+            ContextCompat.startActivity(
+                requireContext(),
+                launchIntent,
+                null
+            )
+            requireActivity().overridePendingTransition(
+                R.anim.slide_in_right,
+                R.anim.slide_out_left
+            );
         }
     }
 }
