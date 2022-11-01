@@ -1,7 +1,6 @@
 package com.maden.mlauncher.view
 
 
-import android.R.attr.bitmap
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.drawable.BitmapDrawable
