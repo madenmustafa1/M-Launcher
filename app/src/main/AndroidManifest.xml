@@ -2,51 +2,41 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.maden.mlauncher">
 
-
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
-
     <permission android:name="android.permission.QUERY_ALL_PACKAGES" />
-
-    <application
-        android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
-
-        android:stateNotNeeded="true"
-        android:clearTaskOnLaunch="true"
-        android:theme="@style/Theme.MLauncher"
-        android:launchMode="singleTask"
-
-
-        >
-
-
-        <activity
-            android:name=".view.MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <action android:name="android.media.action.IMAGE_CAPTURE" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-
-                <category android:name="android.intent.category.HOME" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-
-            </intent-filter>
-        </activity>
-
-    </application>
 
     <queries>
         <intent>
             <action android:name="*" />
         </intent>
     </queries>
+
+    <application
+        android:allowBackup="true"
+        android:clearTaskOnLaunch="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:launchMode="singleTask"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:stateNotNeeded="true"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.MLauncher">
+        <activity
+            android:name=".view.SettingsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.media.action.IMAGE_CAPTURE" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.HOME" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+    </application>
 
 </manifest>

@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    android:id="@+id/wallpaper"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/default_wallpaper"
-
     tools:context=".view.MainActivity">
-    <!--
-        android:background="@android:color/transparent"
 
-    -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -21,27 +19,62 @@
             android:layout_marginTop="10dp"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/systemHour"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_20sdp"
-                android:layout_marginTop="@dimen/_20sdp"
-                android:text="12.02.2022"
-                android:textColor="@color/white"
-                android:textSize="30sp"
-                android:textStyle="bold" />
+                android:orientation="horizontal"
+                android:weightSum="3">
+                <!-- Date -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/systemDate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_20sdp"
-                android:layout_marginTop="@dimen/_1sdp"
-                android:text="22:00"
-                android:textColor="@color/white"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/systemHour"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_20sdp"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:text="12.02.2022"
+                        android:textColor="@color/white"
+                        android:textSize="30sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/systemDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_20sdp"
+                        android:layout_marginTop="@dimen/_1sdp"
+                        android:text="22:00"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:orientation="vertical">
+
+                    <ImageButton
+                        android:id="@+id/settingsButton"
+                        android:background="@drawable/radius_bg"
+                        android:padding="@dimen/_3sdp"
+                        android:src="@drawable/ic_settings"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:layout_width="@dimen/_28sdp"
+                        android:layout_height="@dimen/_28sdp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/appDrawer_recylerView"

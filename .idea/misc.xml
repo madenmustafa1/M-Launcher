@@ -4,14 +4,18 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/AndroidStudioProjects/MLauncher/app/src/main/res/drawable/circle.xml" value="0.1135" />
+        <entry key="..\:/AndroidStudioProjects/MLauncher/app/src/main/res/drawable/ic_baseline_arrow_back_24.xml" value="0.2015" />
+        <entry key="..\:/AndroidStudioProjects/MLauncher/app/src/main/res/drawable/ic_settings.xml" value="0.199" />
         <entry key="..\:/AndroidStudioProjects/MLauncher/app/src/main/res/drawable/img_radius.xml" value="0.1135" />
         <entry key="..\:/AndroidStudioProjects/MLauncher/app/src/main/res/drawable/radius.xml" value="0.176" />
         <entry key="..\:/AndroidStudioProjects/MLauncher/app/src/main/res/drawable/radius_bg.xml" value="0.2445" />
-        <entry key="..\:/AndroidStudioProjects/MLauncher/app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/AndroidStudioProjects/MLauncher/app/src/main/res/layout/activity_main.xml" value="0.152" />
+        <entry key="..\:/AndroidStudioProjects/MLauncher/app/src/main/res/layout/activity_settings.xml" value="0.264" />
         <entry key="..\:/AndroidStudioProjects/MLauncher/app/src/main/res/layout/fragment_app_drawer.xml" value="0.25416666666666665" />
         <entry key="..\:/AndroidStudioProjects/MLauncher/app/src/main/res/layout/fragment_main_page.xml" value="0.264" />
         <entry key="..\:/AndroidStudioProjects/MLauncher/app/src/main/res/layout/item_row_view_list.xml" value="0.264" />
         <entry key="..\:/AndroidStudioProjects/MLauncher/app/src/main/res/layout/status_bar.xml" value="0.24635416666666668" />
+        <entry key="..\:/AndroidStudioProjects/MLauncher/app/src/main/res/menu/options_menu.xml" value="0.2" />
       </map>
     </option>
   </component>

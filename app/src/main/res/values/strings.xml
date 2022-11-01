@@ -2,4 +2,9 @@
     <string name="app_name">M Launcher</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="gallery">Gallery</string>
+    <string name="change_wallpaper">Change wallpaper</string>
+    <string name="unknown_exception">Unknown exception</string>
+    <string name="success">Success</string>
+    <string name="error">Error</string>
 </resources>

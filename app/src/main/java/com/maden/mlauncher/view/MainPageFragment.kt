@@ -1,8 +1,10 @@
 package com.maden.mlauncher.view
 
 
+import android.R.attr.bitmap
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.*
@@ -17,6 +19,7 @@ import com.maden.mlauncher.databinding.FragmentMainPageBinding
 import com.maden.mlauncher.model.AppInfoModel
 import com.maden.mlauncher.util.DateUtil
 import com.maden.mlauncher.util.SharedPrefsManager
+import com.maden.mlauncher.util.getUserWallpaper
 
 
 class MainPageFragment : Fragment() {
@@ -54,15 +57,32 @@ class MainPageFragment : Fragment() {
         sharedPrefsManager = SharedPrefsManager(requireContext())
         transparentStatusBar()
         setUpApps().also {
-            initButton()
+            //initButton()
             initApps()
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        setUpApps().also {
+            initButton()
+            initRecyclerView()
         }
     }
 
     private fun initButton() {
         binding.systemHour.text = DateUtil.getSystemHourAndMin()
         binding.systemDate.text = DateUtil.getSystemDate()
-        initRecyclerView()
+        binding.settingsButton.setOnClickListener {
+            Intent(requireActivity(), SettingsActivity::class.java).apply {
+                startActivity(this)
+            }
+        }
+
+        requireContext().getUserWallpaper()?.let {
+            val drawable: Drawable = BitmapDrawable(it)
+            binding.wallpaper.background = drawable
+        }
     }
 
     private fun initRecyclerView() {
@@ -94,17 +114,18 @@ class MainPageFragment : Fragment() {
         i.addCategory(Intent.CATEGORY_LAUNCHER)
         val allApps = pManager.queryIntentActivities(i, 0)
         for (ri in allApps) {
-            val app = AppInfoModel(
-                label = ri.loadLabel(pManager),
-                packageName = ri.activityInfo.packageName,
-                icon = ri.activityInfo.loadIcon(pManager)
-            )
-            appInfoModelList.add(app)
+            if (ri.activityInfo.packageName != "com.maden.mlauncher") {
+                val app = AppInfoModel(
+                    label = ri.loadLabel(pManager),
+                    packageName = ri.activityInfo.packageName,
+                    icon = ri.activityInfo.loadIcon(pManager)
+                )
+                appInfoModelList.add(app)
+            }
         }
     }
 
     private fun initApps() {
-
         sharedPrefsManager?.let {
             firstApp = it.getString(it.firstApp)
             secondApp = it.getString(it.secondApp)

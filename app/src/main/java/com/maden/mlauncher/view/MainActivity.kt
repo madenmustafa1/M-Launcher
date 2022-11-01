@@ -30,11 +30,9 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-
         requestPermissions()
         hideActionBar()
         loadFragment(MainPageFragment())
-
     }
 
     private fun hideActionBar(){

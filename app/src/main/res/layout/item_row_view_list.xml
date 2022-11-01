@@ -30,7 +30,7 @@
                 android:id="@+id/app_icon"
                 android:layout_width="@dimen/_38sdp"
                 android:layout_height="@dimen/_38sdp"
-                android:src="@drawable/bg"
+                android:src="@drawable/default_wallpaper"
                 android:scaleType="centerCrop"/>
 
         </androidx.cardview.widget.CardView>
